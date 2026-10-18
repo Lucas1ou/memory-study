@@ -1,0 +1,1 @@
+第三方组件与字体沿用各自许可证。翻页引擎为未修改的 @gullabs/flipbook-core 3.2.2，可从 https://github.com/gul-labs/flipbook 及 https://www.npmjs.com/package/@gullabs/flipbook-core 获取对应源码。其余依赖的许可与版权说明随安装包提供。地图数据为 Natural Earth 公有领域数据。

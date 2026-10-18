@@ -1,0 +1,6 @@
+:HL["/memory-study/_next/static/css/710c918a7f3e032f.css","style"]
+:HL["/memory-study/_next/static/css/0f0752b535b0a9c1.css","style"]
+:HL["/memory-study/fonts/noto-serif-sc-regular-subset.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/memory-study/fonts/inter-regular-latin.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"B-wT24v02UHANtyoB7pYp","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
