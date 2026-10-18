@@ -1,5 +1,5 @@
 @font-face{font-family:EditionCondensed;src:url('/fonts/BarlowCondensed-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:TravelSerif;src:url('/fonts/noto-serif-sc-regular-subset.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:TravelSerif;src:url('/fonts/noto-serif-sc-library.woff2') format('woff2');font-weight:100 900;font-display:swap}
 @font-face{font-family:Inter;src:url('/fonts/inter-regular-latin.woff2') format('woff2');font-weight:400;font-display:swap}
 :root{--paper:#f6f4ef;--stage:#e8e6e1;--ink:#242420;--muted:#66665f;--line:#d3d0c7;--serif:TravelSerif,'Songti SC',SimSun,serif;--sans:Inter,'PingFang SC','Microsoft YaHei',sans-serif}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--stage);color:var(--ink)}body{font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}button,a,input{touch-action:manipulation}button{font:inherit;color:inherit;cursor:pointer}button:disabled{cursor:default;opacity:.28}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:5px}button{background:none;border:0}a{color:inherit}button:hover:not(:disabled){color:#74746a}::selection{background:#d8d5c9}svg{flex-shrink:0}.edition{font-size:11px;letter-spacing:.12em;color:var(--muted)}.eyebrow{font-size:10px;letter-spacing:.18em;color:var(--muted);line-height:1.8}
@@ -67,3 +67,5 @@ html,body{overflow-x:clip}
 .binding-light{transform:translateZ(.6px);background:linear-gradient(90deg,#fdfaf170,transparent 35%,#3d332a48);mix-blend-mode:normal}
 .binding-rear .binding-light{transform:rotateY(180deg) translateZ(.6px)}
 @media(max-width:520px){.binding-flight{perspective:1800px}}
+
+.reader-resize-preview{position:absolute!important;left:50%;top:50%;z-index:10;pointer-events:none;transform-origin:center;overflow:hidden}.reader-stage:has(.reader-resize-preview) .flip-slot{transition:none}.reader-stage:has(.reader-resize-preview) .reader-loading{display:none}

@@ -120,7 +120,6 @@
 .mediaFigure:global(.image-loading) .photoSurface::after{content:'正在加载照片…'}
 .mediaFigure:global(.image-failed) .photoSurface::after{content:'照片暂未载入，可轻点查看'}
 .mobileWideLeaf :global(.page-content){left:3%;right:3%;top:7%;bottom:12%}
-.mediaFigure .mobilePhotoHint{font:9px/1.5 var(--sans);opacity:.5;margin-top:9px;flex-shrink:0}
 .holoStem{opacity:.35;background:radial-gradient(ellipse at center,#b3e7fb29,transparent 64%)}
 .holoBase{background:radial-gradient(ellipse at 50% 20%,#8dcfe82b,transparent 60%),linear-gradient(#26333b,#10181d);box-shadow:0 6px 8px #0007,inset 0 1px 1px #a6d5e630}
 .roomFooter{margin-top:0}
@@ -146,3 +145,5 @@
 
 
 .spreadLeaf:global(.book-page)::after{opacity:.22}
+
+@media (orientation:landscape) and (max-height:620px){.reading{height:100dvh}.readingHeader{height:38px;padding:0 max(20px,env(safe-area-inset-left));font-size:10px}.readingHeader>span{font-size:11px}.readingBody{padding:0 8px}.readerControls{height:42px;gap:18px}.readerControls button{width:32px;height:32px;font-size:18px}.bookEnd>span{font-size:6cqw}.bookEnd button{margin-top:8cqw}.bookTitle time{margin-top:8cqw}}

@@ -10,6 +10,7 @@ type Props={pages:BookPage[];mobile:boolean;initialId:string;reduced:boolean;pag
 
 const BookReader=forwardRef<ReaderHandle,Props>(function BookReader({pages,mobile,initialId,reduced,pageRatio,onPosition,onAction,onReady,renderPage},ref){
   const stage=useRef<HTMLDivElement>(null),slot=useRef<HTMLDivElement>(null),templates=useRef<HTMLDivElement>(null),engine=useRef<PageFlip|null>(null);
+  const resizePreview=useRef<HTMLElement|null>(null);
   const position=useRef(initialId),currentPage=useRef(0),atEnd=useRef(false),callbacks=useRef({onPosition,onAction,onReady});
   callbacks.current={onPosition,onAction,onReady};
   const [ready,setReady]=useState(false),[error,setError]=useState(false);
@@ -19,10 +20,10 @@ const BookReader=forwardRef<ReaderHandle,Props>(function BookReader({pages,mobil
     next:()=>navigate.current('next'),prev:()=>navigate.current('prev'),
     goTo:(i)=>navigate.current(i),cancel:()=>engine.current?.cancelTurn(),
   }),[reduced]);
-  useEffect(()=>{const el=stage.current;if(!el)return;const update=()=>{const r=el.getBoundingClientRect();const ratio=pageRatio??(mobile?1.48:1.25);const w=Math.max(1,Math.floor(Math.min(mobile?r.width-24:(r.width-56)/2,mobile?460:560,Math.max(1,r.height-16)/ratio)));const h=Math.max(1,Math.floor(w*ratio));setBox({w,h});};const ro=new ResizeObserver(update);ro.observe(el);update();return()=>ro.disconnect();},[mobile,pageRatio]);
+  useEffect(()=>{const el=stage.current;if(!el)return;const update=()=>{const r=el.getBoundingClientRect();const ratio=pageRatio??(mobile?1.48:1.25);const w=Math.max(1,Math.floor(Math.min(mobile?r.width-24:(r.width-56)/2,mobile?460:560,Math.max(1,r.height-16)/ratio)));const h=Math.max(1,Math.floor(w*ratio));setBox({w,h});};let timer:ReturnType<typeof setTimeout>;const schedule=()=>{clearTimeout(timer);timer=setTimeout(update,100);};const ro=new ResizeObserver(schedule);ro.observe(el);update();return()=>{clearTimeout(timer);ro.disconnect();};},[mobile,pageRatio]);
   useEffect(()=>{
     if(!box.w||!slot.current||!templates.current)return;
-    let disposed=false;let book:PageFlip|null=null;const host=document.createElement('div');host.className='flip-book';host.style.width=`${box.w*(mobile?1:2)}px`;host.style.height=`${box.h}px`;slot.current.appendChild(host);setReady(false);setError(false);
+    let disposed=false;let book:PageFlip|null=null;const host=document.createElement('div');host.className='flip-book';host.style.width=`${box.w*(mobile?1:2)}px`;host.style.height=`${box.h}px`;host.style.visibility='hidden';slot.current.appendChild(host);if(!resizePreview.current)setReady(false);setError(false);
     const leaves=Array.from(templates.current.children).map(child=>child.cloneNode(true) as HTMLElement);
     let lastStable=0;
     let pointerStart:{x:number;y:number}|null=null,ignoreClickUntil=0;
@@ -46,7 +47,7 @@ const BookReader=forwardRef<ReaderHandle,Props>(function BookReader({pages,mobil
       else reduced?book.turnToPrevPage():book.flipPrev();
     };
     const sync=(snapshot:BookSnapshot)=>{
-      if(disposed)return;const indices=snapshot.visiblePages;atEnd.current=indices.includes(pages.length-1);lastStable=snapshot.page;currentPage.current=snapshot.page;position.current=pages[snapshot.page]?.id??'cover';
+      if(disposed)return;const indices=snapshot.visiblePages;atEnd.current=indices.includes(pages.length-1);lastStable=snapshot.page;currentPage.current=snapshot.page;const anchored=indices.find(i=>pages[i]?.assetIds?.includes(position.current.replace(/-(left|right)$/, '')));const meaningful=anchored??indices.find(i=>pages[i]?.type!=='endpaper')??snapshot.page;position.current=pages[meaningful]?.id??'title';
       leaves.forEach((el,i)=>{const visible=indices.includes(i);el.setAttribute('aria-hidden',String(!visible));el.inert=!visible;if(!visible)el.querySelectorAll('video').forEach(video=>video.pause());});
       slot.current?.style.setProperty('--left-depth',`${1+Math.round(6*snapshot.page/Math.max(1,pages.length-1))}px`);
       slot.current?.style.setProperty('--right-depth',`${7-Math.round(6*snapshot.page/Math.max(1,pages.length-1))}px`);
@@ -80,15 +81,15 @@ const BookReader=forwardRef<ReaderHandle,Props>(function BookReader({pages,mobil
     (async()=>{try{const {PageFlip}=await import('@gullabs/flipbook-core');if(disposed)return;
       const start=Math.max(0,resolvePageIndex(pages,position.current));
       book=new PageFlip(host,{width:box.w,height:box.h,sizing:'fixed',autoSize:false,usePortrait:mobile,hardCovers:false,initialPage:start,flippingTime:reduced?0:620,drawShadow:true,maxShadowOpacity:.23,pageBackground:'#f6f4ef',allowTouchScroll:true,pointerInput:['mouse','touch','pen'],respectInteractiveContent:true,flipOnClick:'never',foldCornerOnHover:false,respectReducedMotion:true});
-      engine.current=book;book.on('ready',async e=>{await preparePages([...e.data.visiblePages,start+2,start+3]);if(disposed)return;sync(e.data);requestAnimationFrame(()=>{if(disposed)return;book?.update();setReady(true);callbacks.current.onReady?.();});});book.on('flip',e=>sync(e.data));book.on('changeState',e=>{if(e.data.state==='user_fold'||e.data.state==='flipping'){loadImages([lastStable,lastStable+1]);}});book.loadFromHTML(leaves);
+      engine.current=book;book.on('ready',async e=>{await preparePages([...e.data.visiblePages,start+2,start+3]);if(disposed)return;sync(e.data);requestAnimationFrame(()=>{if(disposed)return;book?.update();host.style.visibility='';host.dataset.prepared='true';if(resizePreview.current&&slot.current)slot.current.style.transition='none';resizePreview.current?.remove();resizePreview.current=null;setReady(true);callbacks.current.onReady?.();});});book.on('flip',e=>sync(e.data));book.on('changeState',e=>{if(e.data.state==='user_fold'||e.data.state==='flipping'){loadImages([lastStable,lastStable+1]);}});book.loadFromHTML(leaves);
       host.addEventListener('click',action);host.addEventListener('pointerdown',gate,true);host.addEventListener('pointerup',release,true);document.addEventListener('visibilitychange',cancel);window.addEventListener('keydown',key);
     }catch(e){console.error('Book reader failed',e);if(!disposed){setError(true);callbacks.current.onAction('binding-error');}}})();
-    return()=>{disposed=true;navigate.current=()=>{};host.removeEventListener('click',action);host.removeEventListener('pointerdown',gate,true);host.removeEventListener('pointerup',release,true);document.removeEventListener('visibilitychange',cancel);window.removeEventListener('keydown',key);book?.destroy();if(engine.current===book)engine.current=null;host.remove();};
+    return()=>{if(host.dataset.prepared&&stage.current){resizePreview.current?.remove();const preview=host.cloneNode(true) as HTMLElement;preview.classList.add('reader-resize-preview');preview.inert=true;preview.setAttribute('aria-hidden','true');const r=stage.current.getBoundingClientRect();preview.style.transform=`translate(-50%,-50%) scale(${Math.min(1,r.width/host.offsetWidth,r.height/host.offsetHeight)})`;stage.current.appendChild(preview);resizePreview.current=preview;}disposed=true;navigate.current=()=>{};host.removeEventListener('click',action);host.removeEventListener('pointerdown',gate,true);host.removeEventListener('pointerup',release,true);document.removeEventListener('visibilitychange',cancel);window.removeEventListener('keydown',key);book?.destroy();if(engine.current===book)engine.current=null;host.remove();};
   },[box.w,box.h,mobile,pages,reduced,renderPage]);
   return <div className={`reader-stage ${mobile?'is-single':'is-spread'}`} ref={stage}>
     <div className="book-templates" ref={templates} hidden inert aria-hidden="true">{pages.map((page,index)=>renderPage(page,index,pages.length))}</div>
     <div className={`flip-slot ${ready?'is-ready':''}`} ref={slot} tabIndex={-1} aria-label="旅行艺术书页" style={box.w?{width:box.w*(mobile?1:2),height:box.h}:undefined}><div className="paper-block paper-block-left" aria-hidden="true"/><div className="paper-block paper-block-right" aria-hidden="true"/></div>
-    {!ready&&!error&&<div className="reader-loading" role="status">正在打开这本书…</div>}
+    {!ready&&!error&&!resizePreview.current&&<div className="reader-loading" role="status">正在打开这本书…</div>}
     {error&&<div className="reader-loading"><p>书页暂时无法展开</p><button onClick={()=>onAction('comfortable')}>进入舒适阅读 →</button></div>}
   </div>;
 });
