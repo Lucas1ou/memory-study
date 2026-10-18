@@ -1,0 +1,82 @@
+.composition{position:absolute;inset:0;z-index:3;pointer-events:none;container-type:size}
+.composition .chinese{margin:0!important}
+.index{position:absolute;top:5.5%;left:10%;right:8%;display:flex;align-items:center;gap:3cqw;font:1.65cqw/1.2 var(--sans);letter-spacing:.13em;color:var(--edition-ink,#242722)}
+.index i{height:1px;background:currentColor;opacity:.35;flex:1}
+.chinese{position:absolute;top:12%;left:10%;right:8%;margin:0!important;color:var(--edition-ink,#242722)!important;font:500 17cqw/1.12 var(--serif)!important;letter-spacing:.04em!important;display:flex;gap:.12em;text-wrap:nowrap}
+.chinese span{display:block}
+.latin{position:absolute;top:28%;left:10%;right:7%;font:400 15.5cqw/.9 Impact,'Arial Narrow',sans-serif;letter-spacing:-.025em;color:var(--type-accent);white-space:nowrap}
+.register{position:absolute;top:39%;left:10%;font:1.6cqw var(--sans);letter-spacing:.2em;opacity:.6}
+.city .chinese{top:8.5%;font-family:'Microsoft YaHei','PingFang SC',sans-serif!important;font-size:10cqw!important;font-weight:600!important;letter-spacing:.12em!important}
+.city .latin{top:19%;left:9%;font-size:25cqw;line-height:.88;letter-spacing:-.025em;white-space:normal;overflow-wrap:anywhere;max-width:83%;font-stretch:condensed}
+.city .register{top:43%;left:auto;right:8%;writing-mode:vertical-rl;letter-spacing:.14em}
+
+.composition[data-title-edition=guiyang] .chinese{display:block;top:11%;font-size:17cqw!important;line-height:1.16!important;letter-spacing:.1em!important}
+.composition[data-title-edition=guiyang] .latin{top:auto;bottom:8%;font:400 4cqw/1 var(--sans);letter-spacing:.13em}
+.composition[data-title-edition=guiyang] .register{display:none}
+.composition[data-title-edition=japan] .latin{top:12%;font-size:28cqw;letter-spacing:.015em}
+.composition[data-title-edition=japan] .chinese{top:31%;font-size:12.5cqw!important;letter-spacing:.3em!important}
+.composition[data-title-edition=japan] .register{top:43%;font-size:1.4cqw}
+.composition[data-title-edition=hailing] .chinese{top:20%;font-size:20cqw!important;letter-spacing:.04em!important}
+.composition[data-title-edition=hailing] .latin{top:12%;font:400 5cqw/1 var(--sans);letter-spacing:.27em}
+.composition[data-title-edition=hailing] .register{top:39%;width:32%;padding-top:2cqw;border-top:1px solid var(--type-accent);font-size:1.4cqw}
+.composition[data-title-edition=beijing] .chinese{top:12%;font:500 15cqw/1.1 var(--serif)!important;letter-spacing:.2em!important}
+.composition[data-title-edition=beijing] .latin{top:29%;font-size:25cqw}
+.composition[data-title-edition=beijing] .register{display:none}
+.composition[data-title-edition=shanghai] .chinese{top:12%;left:26%;right:6%;font-size:25cqw!important;letter-spacing:-.06em!important;font-weight:500!important}
+.composition[data-title-edition=shanghai] .latin{top:13%;left:10%;right:auto;writing-mode:vertical-rl;transform:rotate(180deg);font-size:7cqw;letter-spacing:.05em;white-space:nowrap}
+.composition[data-title-edition=shanghai] .register{display:none}
+.composition[data-title-edition=suzhou] .chinese{display:block;top:12%;left:auto;right:12%;writing-mode:vertical-rl;font-size:19cqw!important;letter-spacing:.14em!important}
+.composition[data-title-edition=suzhou] .latin{top:13%;left:11%;font:400 3.8cqw/1 var(--sans);letter-spacing:.2em;writing-mode:vertical-rl}
+.composition[data-title-edition=suzhou] .register{display:none}
+.composition[data-title-edition=hongkong] .chinese{top:10%;left:auto;right:9%;font-size:7.5cqw!important;letter-spacing:.1em!important}
+.composition[data-title-edition=hongkong] .latin{max-width:90%;white-space:pre-line;top:20%;font-size:27.4cqw;color:#ba522e;line-height:.92;word-spacing:10cqw}
+.composition[data-title-edition=hongkong] .register{display:none}
+.composition[data-title-edition=napa] .chinese{top:13%;font-size:18cqw!important;letter-spacing:.04em!important}
+.composition[data-title-edition=napa] .latin{top:31%;font:400 3.6cqw/1 var(--sans);letter-spacing:.28em}
+.composition[data-title-edition=napa] .register{display:none}
+.leaf.composition .chinese{top:15%;left:0;right:auto;font-size:15cqw!important;display:flex;writing-mode:horizontal-tb}
+.leaf.composition .latin{top:50%;left:0;right:auto;bottom:auto;writing-mode:horizontal-tb;transform:none;font:400 4cqw/1 var(--sans);letter-spacing:.12em}
+.leaf.composition .index{left:0;right:0;top:0}
+
+.leaf .register{display:none}
+.composition.english .chinese{top:11%;left:9%;right:7%;display:block;writing-mode:horizontal-tb;font:600 24cqw/.85 EditionCondensed,'Arial Narrow',sans-serif!important;letter-spacing:-.02em!important;white-space:nowrap}
+.composition.english .latin,.composition.english .register{display:none}
+.composition.english[data-title-edition=japan] .chinese{font-size:32cqw!important;color:#a7473a!important;letter-spacing:.015em!important}
+.composition.english[data-title-edition=shanghai] .chinese{font-size:21.8cqw!important;color:#232421!important}
+.composition.english[data-title-edition=beijing] .chinese{font-size:25cqw!important;color:#8d3c38!important}
+.composition.english[data-title-edition=hongkong] .chinese{font-size:32cqw!important;color:#ba522e!important}
+.leaf.composition.english .chinese{left:0;top:15%;font-size:21cqw!important}
+.composition.english[data-title-edition=japan] .chinese{font-family:Georgia,'Times New Roman',serif!important;font-style:italic!important;font-weight:400!important;font-size:26cqw!important;letter-spacing:-.07em!important}
+.composition.english[data-title-edition=beijing] .chinese{font-family:var(--sans)!important;font-weight:400!important;font-size:13.2cqw!important;letter-spacing:.16em!important}
+.composition.english[data-title-edition=shanghai] .chinese{font-family:var(--sans)!important;font-weight:400!important;font-size:15cqw!important;letter-spacing:.005em!important}
+.composition[data-title-edition=suzhou] .chinese{left:11%;right:auto;top:12%;font-size:18cqw!important}
+.composition[data-title-edition=suzhou] .latin{left:11%;top:40%;writing-mode:horizontal-tb;font-size:3.2cqw;letter-spacing:.16em}
+
+.leaf.composition.english[data-title-edition=beijing] .chinese{font-size:12.5cqw!important;letter-spacing:.16em!important}
+.leaf.composition.english[data-title-edition=hongkong] .chinese{font-family:Georgia,serif!important;font-size:20cqw!important;font-weight:400!important;letter-spacing:.015em!important;color:#b88a61!important}
+.leaf.composition.english[data-title-edition=shanghai] .chinese{color:#687b6c!important}
+
+.leaf.composition[data-title-edition=beijing] .chinese{font-family:var(--serif)!important;font-weight:800!important;font-size:27cqw!important;letter-spacing:.16em!important;color:#983e33!important}
+.leaf.composition[data-title-edition=beijing] .latin{display:none}
+.leaf.composition.english[data-title-edition=hongkong] .chinese{color:#252622!important;font-weight:700!important}
+.leaf.composition.english[data-title-edition=shanghai] .chinese{font-family:EditionCondensed,sans-serif!important;font-size:23cqw!important;font-weight:700!important;color:#a84436!important}
+
+
+.leaf.composition[data-title-edition=guiyang] .chinese{display:block;font-family:var(--serif)!important;font-weight:800!important;font-size:23cqw!important;letter-spacing:.1em!important;color:#444e3d!important;line-height:1.2!important}
+.leaf.composition[data-title-edition=guiyang] .latin{display:none}
+.leaf.composition[data-title-edition=hailing] .chinese{font-family:var(--serif)!important;font-weight:800!important;font-size:22cqw!important;letter-spacing:.055em!important;color:#244f53!important}
+.leaf.composition[data-title-edition=hailing] .latin{top:47%;font-size:3.5cqw}
+.leaf.composition[data-title-edition=suzhou] .chinese{font-family:var(--serif)!important;font-weight:800!important;font-size:26cqw!important;letter-spacing:.1em!important}
+.leaf.composition[data-title-edition=suzhou] .latin{top:48%;font-family:Georgia,serif;letter-spacing:.2em}
+
+
+.leaf.composition[data-title-edition=napa]{display:flex;flex-direction:column;align-items:flex-start;padding-top:9cqw;box-sizing:border-box}
+.leaf.composition[data-title-edition=napa] .chinese{position:static;display:block;flex:0 0 auto;writing-mode:horizontal-tb;font-size:clamp(32px,22cqw,84px)!important;font-weight:600!important;letter-spacing:.12em!important;line-height:1.16!important;color:#59664f!important}
+.leaf.composition[data-title-edition=napa] .latin{position:static;flex:0 0 auto;display:block;margin-top:4cqw;font-family:Georgia,serif;font-size:4cqw;letter-spacing:.12em}
+
+
+.leaf.composition:is([data-title-edition=hailing],[data-title-edition=suzhou]){display:flex;flex-direction:column;align-items:flex-start;padding-top:9cqw;box-sizing:border-box}
+.leaf.composition:is([data-title-edition=hailing],[data-title-edition=suzhou]) .chinese{position:static;display:block;flex:0 0 auto;writing-mode:horizontal-tb;line-height:1.12!important}
+.leaf.composition[data-title-edition=hailing] .chinese{font-size:clamp(32px,22cqw,84px)!important}
+.leaf.composition[data-title-edition=suzhou] .chinese{font-size:clamp(32px,26cqw,88px)!important}
+.leaf.composition:is([data-title-edition=hailing],[data-title-edition=suzhou]) .latin{position:static;flex:0 0 auto;display:block;margin-top:4cqw}
