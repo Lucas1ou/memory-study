@@ -1,0 +1,6 @@
+:HL["/memory-study/v2026-10-21-2/_next/static/css/df372182a9d33589.css","style"]
+:HL["/memory-study/v2026-10-21-2/_next/static/css/754b88281d244dc5.css","style"]
+:HL["/memory-study/v2026-10-21-2/fonts/noto-serif-sc-library.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+:HL["/memory-study/v2026-10-21-2/fonts/inter-regular-latin.woff2","font",{"crossOrigin":"anonymous","type":"font/woff2"}]
+1:[["children",{"s":"__PAGE__","h":160}]]
+0:{"b":"aHSyFHM_mNRVShw6eyoQ4","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
